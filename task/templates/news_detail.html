@@ -1,0 +1,17 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %}
+{% load my_filters %} <!-- не забываем заранее загружать наши фильтры! -->
+<!-- Название у нас будет posts -->
+{% block title %}
+Posts
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, ID которого было передано в адрес -->
+{% block content %}
+<hr>
+<h5 align="left">{{ post.dateCreation|date:'d-F-Y' }}</h5>
+<h5 align="left">{{ post.title }}</h5>
+<!-- <h1 align="left">{{ "news.dateCreation|date:'d-F-Y h:i'" }}</h1> -->
+<h6 align="left">{{ post.text }}</h6>
+<hr>
+{% endblock content %}

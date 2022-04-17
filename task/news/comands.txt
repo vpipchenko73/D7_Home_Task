@@ -1,0 +1,6 @@
+Запуск Celery периодические задачи
+1. установить модуль - eventlet
+2.  в отдельном терминале запустить - runserver, запуск Celery beat - celery -A task beat
+    и запустить задачу - celery -A task worker -l info -P eventlet
+3. удалить все задачи из celery - celery -A task purge ( в коде from proj.celery import app
+app.control.purge() )

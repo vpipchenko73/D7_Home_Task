@@ -1,0 +1,15 @@
+{% extends 'flatpages/default.html' %}
+{% block title %} Product list {% endblock title %}
+
+{% block content %}
+<h2>Вы действительно хотите удалить данную статью ?</h2>
+<hr>
+<h5 align="left">{{ post.dateCreation|date:'d-F-Y' }}</h5>
+<h5 align="left">{{ post.title }}</h5>
+<!-- <h1 align="left">{{ "news.dateCreation|date:'d-F-Y h:i'" }}</h1> -->
+<h6 align="left">{{ post.text }}</h6>
+<hr>
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="подтвердить"></form>
+{% endblock content %}

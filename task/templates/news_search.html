@@ -1,0 +1,35 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %}
+{% load my_filters %} <!-- не забываем заранее загружать наши фильтры! -->
+
+<!-- Название у нас будет posts -->
+{% block title %}
+Posts
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все новости -->
+
+{% block content %}
+   <h2>{{"Сегодня-"}}{{time_now|date:'M / d / Y'}} {{value1}}</h2>
+
+   <!-- Перед таблицей добавим форму для поиска -->
+    <form method="GET">
+        {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+        <input type="submit" value="Найти">
+    </form>
+   {% if news_search %} <!-- Если есть новости, то выводим таблицу с ними -->
+
+   {% for news in filter.qs %} <!-- Для каждой новости будете генерироваться новая строчка, т. е. новый html-код. При этом сам цикл работает точно также, как и в Python. product — переменная цикла, т. е. наш товар, взятый из общего списка -->
+
+      <h6 align="left">{{ news.dateCreation|date:'d-F-Y' }}</h6>
+      <h6 align="left">{{ news.title|Censor }}</h6>
+      <h6 align="left">{{ news.text|Censor }}</h6>
+      <hr>
+   {% endfor %}
+
+
+   {% else %}
+      <h2>Новостей нет!</h2>
+   {% endif %}
+
+{% endblock content %}
